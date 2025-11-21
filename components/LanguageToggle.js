@@ -1,23 +1,33 @@
-import { useLocale } from "../lib/LocaleContext";
-import { useState } from "react";
+import { useLocale, useSetLocale, useTranslations } from "../lib/locale";
+import { useState, useEffect, useRef } from "react";
 
 export default function LanguageToggle() {
-  const { locale, setLocale } = useLocale();
+  const locale = useLocale();
+  const setLocale = useSetLocale();
+  const t = useTranslations();
   const [animate, setAnimate] = useState(false);
 
+  // Audio ref
+  const clickSound = useRef(null);
+
+  useEffect(() => {
+    // Initialize the audio
+    clickSound.current = new Audio("/camera-click.mp3");
+  }, []);
+
   const toggleLanguage = () => {
-    // Trigger shake animation
+    // Play sound
+    if (clickSound.current) {
+      clickSound.current.currentTime = 0;
+      clickSound.current.play();
+    }
+
+    // Trigger animation
     setAnimate(true);
+    setTimeout(() => setAnimate(false), 300);
 
-    setTimeout(() => setAnimate(false), 500);
-
-    // Switch EN ↔ ML
-    const newLocale = locale === "en" ? "ml" : "en";
-    setLocale(newLocale);
-
-    // Play click sound
-    const audio = new Audio("/click-sound.mp3");
-    audio.play();
+    // Switch locale
+    setLocale(locale === "en" ? "ml" : "en");
   };
 
   return (
@@ -25,7 +35,7 @@ export default function LanguageToggle() {
       onClick={toggleLanguage}
       style={{
         position: "fixed",
-        bottom: "20px",
+        bottom: "30px",
         right: "20px",
         width: "70px",
         height: "70px",
@@ -34,14 +44,15 @@ export default function LanguageToggle() {
       }}
     >
       <img
-        src="/camera-toggle.png"
+        src="/camera-toggle.jpeg"
         alt="language toggle"
         style={{
           width: "100%",
           height: "100%",
           transition: "transform 0.2s",
-          transform: animate ? "scale(0.9) rotate(-10deg)" : "scale(1)",
-          filter: "drop-shadow(0 0 8px rgba(0,0,0,0.3))",
+          transform: animate ? "scale(0.9) rotate(-8deg)" : "scale(1)",
+          filter: "drop-shadow(0px 0px 5px rgba(0,0,0,0.4))",
+          borderRadius: "6px"
         }}
       />
     </div>
