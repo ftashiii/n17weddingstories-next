@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
 
-import styles from "../styles/globals.module.css"; // small helper styles we put in globals.css
+// small helper styles we put in globals.css
 
 export default function Home() {
   const [openContact, setOpenContact] = useState(false);
