@@ -2,7 +2,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
-import "../styles/globals.css";
+
  // small helper styles we put in globals.css
 
 export default function Home() {
