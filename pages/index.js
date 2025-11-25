@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 // IMPORT PLAIN GLOBAL CSS (IMPORTANT)
-import "../styles/globals.css";
+import "../styles/globals.module.css";
 
 export default function Home() {
   const [openContact, setOpenContact] = useState(false);
