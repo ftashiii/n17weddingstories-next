@@ -3,8 +3,6 @@ import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
 
-// IMPORT PLAIN GLOBAL CSS (IMPORTANT)
-
 
 export default function Home() {
   const [openContact, setOpenContact] = useState(false);
