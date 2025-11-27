@@ -1,4 +1,4 @@
-import { useLocale, useSetLocale, useTranslations } from "../lib/locale";
+import { useLocale, useSetLocale, useTranslations } from "../lib/locale.js";
 import { useState, useEffect, useRef } from "react";
 
 export default function LanguageToggle() {
